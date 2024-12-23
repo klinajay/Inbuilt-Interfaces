@@ -6,33 +6,36 @@ using System.Threading.Tasks;
 
 namespace Inbuilt_Interfaces
 {
-    internal class StudentRecord :  IComparable
+    internal class StudentRecord : ICloneable
     {
-        public string studentName;
-        public int percentage;
-        public int age;
+        public List<Student> students;
 
-        public StudentRecord(string studentName, int percentage, int age)
+        public StudentRecord()
         {
-            this.studentName = studentName;
-            this.percentage = percentage;
-            this.age = age;
+            students = new List<Student>();
         }
-        public int CompareTo(Object other)
+        public Object Clone()
         {
-            var otherRecord = (StudentRecord) other;
-            if (otherRecord.percentage > this.percentage) {
-                return 1;
-            }
-            else if (otherRecord.percentage < this.percentage)
+            List<Student> list = new List<Student>();
+            StudentRecord result = new StudentRecord();
+            foreach (var student in students)
             {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
+                if (student.percentage > 75) list.Add(student);
 
+            }
+            result.students = list;
+            return result;
+        }
+        public void AddStudents(Student student)
+        {
+            students.Add(student);
+        }
+        public void PrintList()
+        {
+            foreach (var student in students)
+            {
+                Console.WriteLine($"{student.studentName} {student.percentage}");
+            }
         }
     }
 }

@@ -6,8 +6,8 @@ internal class Program
     {
         Console.WriteLine("Hello, World!");
 
-        StudentRecord student1 = new StudentRecord("Ram" , 89 , 21);
-        StudentRecord student2 = new StudentRecord("shyam", 50, 21);
+        Student student1 = new Student("Ram" , 89 , 21);
+        Student student2 = new Student("shyam", 50, 21);
 
         if(student1.CompareTo(student2) == 1 )
         {
@@ -21,5 +21,16 @@ internal class Program
         {
             Console.WriteLine($"Both {student1} and {student2} performed equally");
         }
+
+        StudentRecord record = new StudentRecord();
+        record.AddStudents(student1);
+        record.AddStudents(student2);
+
+
+        Console.WriteLine("Students who scores more than 75% are....");
+        StudentRecord record1 = (StudentRecord) record.Clone();
+
+        record1.PrintList();
+
     }
 }
